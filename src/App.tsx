@@ -7,6 +7,7 @@ import PianoRoll from './views/PianoRoll/PianoRoll';
 function App() {
   const [sequence, setSequence] = useState<SequencedNote[]>([]);
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
+  const [audioCtx, setAudioCtx] = useState<AudioContext>();
 
   const billieJean: SequencedNote[] = [
     {note: 'F#', octave: 3, start: 0},
@@ -21,6 +22,7 @@ function App() {
 
   useEffect(() => {
     setSequence(billieJean);
+    setAudioCtx(new window.AudioContext());
   }, []);
 
   const handleAddToSequence = (noteToAdd: SequencedNote) => {
@@ -40,7 +42,11 @@ function App() {
   }
 
   const handlePlaySequence = (loop: boolean, bpm: number) => {
-    const newIntervalId = playSequence(sequence, bpm, loop);
+    if (!audioCtx) {
+      console.error('AudioContext has not loaded');
+      return;
+    }
+    const newIntervalId = playSequence(audioCtx, sequence, bpm, loop);
     if (newIntervalId) {
       setIntervalId(newIntervalId)
     }
@@ -49,7 +55,12 @@ function App() {
   return (
     <div className="App">
       <Controls handlePlaySequence={handlePlaySequence} />
-      <PianoRoll sequence={sequence} handleAddToSequence={handleAddToSequence} handleRemoveFromSequence={handleRemoveFromSequence} />
+      <PianoRoll
+        sequence={sequence}
+        handleAddToSequence={handleAddToSequence}
+        handleRemoveFromSequence={handleRemoveFromSequence}
+        audioCtx={audioCtx}
+      />
     </div>
   );
 }

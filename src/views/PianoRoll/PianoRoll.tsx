@@ -8,9 +8,10 @@ interface PianoRollProps extends React.HTMLAttributes<HTMLDivElement> {
   sequence: SequencedNote[];
   handleAddToSequence: Function;
   handleRemoveFromSequence: Function;
+  audioCtx?: AudioContext;
 }
 
-function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, ...intrinsic }: PianoRollProps) {
+function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, audioCtx, ...intrinsic }: PianoRollProps) {
   const notes: Note[] = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
   const keys = 61;
   const startingNote = 3;
@@ -18,7 +19,13 @@ function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, ..
 
   return (
     <PianoRollStyles {...intrinsic}>
-      <Keyboard keys={keys} notes={notes} startingNote={startingNote} startingOctave={startingOctave} />
+      <Keyboard 
+        keys={keys} 
+        notes={notes} 
+        startingNote={startingNote} 
+        startingOctave={startingOctave} 
+        audioCtx={audioCtx}
+      />
       <Grid 
         styledProps={{beats: 4}} 
         keys={keys} 

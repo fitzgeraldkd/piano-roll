@@ -8,9 +8,10 @@ interface KeyboardProps extends React.HTMLAttributes<HTMLDivElement> {
   notes: Note[];
   startingNote: number;
   startingOctave: number;
+  audioCtx?: AudioContext;
 }
 
-function Keyboard({keys, notes, startingNote, startingOctave}: KeyboardProps) {
+function Keyboard({keys, notes, startingNote, startingOctave, audioCtx}: KeyboardProps) {
 
   const renderKeys = (keys: number) => {
     const keyElements = [];
@@ -21,7 +22,7 @@ function Keyboard({keys, notes, startingNote, startingOctave}: KeyboardProps) {
       classNames.push((thisNote.length === 1 ? 'key-natural' : 'key-accidental'));
       const noteObj: NoteObj = {note: thisNote, octave: thisOctave};
       keyElements.push(
-        <span key={thisKey} className={classNames.join(' ')} onClick={() => playNote(noteObj)}>
+        <span key={thisKey} className={classNames.join(' ')} onClick={() => playNote(audioCtx, noteObj)}>
           {thisNote}{thisOctave}
         </span>
       );

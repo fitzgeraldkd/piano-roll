@@ -1,20 +1,24 @@
 import { Note, NoteObj, SequencedNote } from "./types";
 
-export function playNote(noteObj: NoteObj, start=0, duration=0.125, bpm=120) {
+export function playNote(audioCtx: AudioContext | undefined, noteObj: NoteObj, start=0, duration=0.125, bpm=120) {
   // const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const audioCtx = new window.AudioContext();
+  // const audioCtx = new window.AudioContext();
+  if (!audioCtx) {
+    console.error('Audio context has not loaded');
+    return;
+  }
   const oscillator = audioCtx.createOscillator();
   oscillator.type = 'square';
   oscillator.frequency.setValueAtTime(noteToFreq(noteObj), 0);
   oscillator.connect(audioCtx.destination);
-  oscillator.start(beatToTime(start, bpm));
-  oscillator.stop(beatToTime(start + duration, bpm));
+  oscillator.start(audioCtx.currentTime + beatToTime(start, bpm));
+  oscillator.stop(audioCtx.currentTime + beatToTime(start + duration, bpm));
 }
 
-export function playSequence(sequence: SequencedNote[], bpm=120, loop=false) {
+export function playSequence(audioCtx: AudioContext, sequence: SequencedNote[], bpm=120, loop=false) {
   const startSequence = () => {
     for (const note of sequence) {
-      playNote(note, note.start);
+      playNote(audioCtx, note, note.start);
     }
   };
 
