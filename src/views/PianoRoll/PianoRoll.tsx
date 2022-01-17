@@ -6,9 +6,11 @@ import PianoRollStyles from './PianoRoll.styles';
 
 interface PianoRollProps extends React.HTMLAttributes<HTMLDivElement> {
   sequence: SequencedNote[];
+  handleAddToSequence: Function;
+  handleRemoveFromSequence: Function;
 }
 
-function PianoRoll({ sequence, ...intrinsic }: PianoRollProps) {
+function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, ...intrinsic }: PianoRollProps) {
   const notes: Note[] = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
   const keys = 61;
   const startingNote = 3;
@@ -17,7 +19,16 @@ function PianoRoll({ sequence, ...intrinsic }: PianoRollProps) {
   return (
     <PianoRollStyles {...intrinsic}>
       <Keyboard keys={keys} notes={notes} startingNote={startingNote} startingOctave={startingOctave} />
-      <Grid styledProps={{beats: 4}} keys={keys} notes={notes} startingNote={startingNote} startingOctave={startingOctave} sequence={sequence} />
+      <Grid 
+        styledProps={{beats: 4}} 
+        keys={keys} 
+        notes={notes} 
+        startingNote={startingNote} 
+        startingOctave={startingOctave} 
+        sequence={sequence} 
+        handleAddToSequence={handleAddToSequence}
+        handleRemoveFromSequence={handleRemoveFromSequence}
+      />
     </PianoRollStyles>
   );
 }

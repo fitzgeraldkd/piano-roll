@@ -23,6 +23,22 @@ function App() {
     setSequence(billieJean);
   }, []);
 
+  const handleAddToSequence = (noteToAdd: SequencedNote) => {
+    setSequence(currentSequence => [...currentSequence, noteToAdd]);
+  };
+
+  const handleRemoveFromSequence = (noteToRemove: SequencedNote) => {
+    setSequence(currentSequence => currentSequence.filter(note => {
+      let key: keyof typeof note;
+      for (key in note) {
+        if (note[key] !== noteToRemove[key]) {
+          return true;
+        }
+      }
+      return false;
+    }));
+  }
+
   const handlePlaySequence = (loop: boolean, bpm: number) => {
     const newIntervalId = playSequence(sequence, bpm, loop);
     if (newIntervalId) {
@@ -33,7 +49,7 @@ function App() {
   return (
     <div className="App">
       <Controls handlePlaySequence={handlePlaySequence} />
-      <PianoRoll sequence={sequence} />
+      <PianoRoll sequence={sequence} handleAddToSequence={handleAddToSequence} handleRemoveFromSequence={handleRemoveFromSequence} />
     </div>
   );
 }
