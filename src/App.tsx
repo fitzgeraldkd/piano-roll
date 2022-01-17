@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { playSequence } from './utils/audio';
 import { SequencedNote, Wave } from './utils/types';
 import Controls from './views/Controls/Controls';
