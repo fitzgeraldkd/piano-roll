@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ControlsStyles from './Controls.styles';
 
 interface ControlsProps {
   handlePlaySequence: Function;
@@ -18,16 +19,22 @@ function Controls({ handlePlaySequence, handleStopAudio }: ControlsProps) {
   };
 
   return (
-    <div>
-      <label htmlFor='loop'>Loop?</label>
-      <input id='loop' type='checkbox' checked={loop} onChange={handleSetLoop} />
+    <ControlsStyles>
+      <span className='title'>
+        Piano Roll by Kenny Fitzgerald
+      </span>
+      <span className='inputs'>
+        <label htmlFor='loop'>Loop?</label>
+        <input id='loop' type='checkbox' checked={loop} onChange={handleSetLoop} />
 
-      <label htmlFor='bpm'>BPM:</label>
-      <input id='bpm' type='number' value={bpm} onChange={handleChangeBpm} min={30} max={500} />
+        <label htmlFor='bpm'>BPM:</label>
+        <input id='bpm' type='number' value={bpm} onChange={handleChangeBpm} min={30} max={500} />
 
-      <button onClick={() => handlePlaySequence(loop, bpm)}>Play</button>
-      <button onClick={() => handleStopAudio()}>Stop</button>
-    </div>
+        <button onClick={() => handlePlaySequence(loop, bpm)}>Play</button>
+        <button onClick={() => handleStopAudio()}>Stop</button>
+      </span>
+      
+    </ControlsStyles>
   );
 }
 
