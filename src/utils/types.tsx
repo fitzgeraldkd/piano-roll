@@ -6,3 +6,7 @@ export interface NoteObj {
   note: Note;
   octave: number;
 }
+
+export interface SequencedNote extends NoteObj {
+  start: number;
+}

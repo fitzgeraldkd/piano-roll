@@ -1,9 +1,13 @@
 import React from 'react';
 
-function Controls() {
+interface ControlsProps {
+  handlePlaySequence: Function;
+}
+
+function Controls({ handlePlaySequence }: ControlsProps) {
   return (
     <div>
-      
+      <button onClick={() => handlePlaySequence()}>Play</button>
     </div>
   );
 }
