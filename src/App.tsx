@@ -5,11 +5,6 @@ import Controls from './views/Controls/Controls';
 import PianoRoll from './views/PianoRoll/PianoRoll';
 
 function App() {
-  const [sequence, setSequence] = useState<SequencedNote[]>([]);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
-  const [audioCtx, setAudioCtx] = useState<AudioContext>();
-  const [oscillator, setOscillator] = useState<Wave>('square');
-
   const billieJean: SequencedNote[] = [
     {note: 'F#', octave: 3, start: 0},
     {note: 'C#', octave: 3, start: 0.5},
@@ -21,10 +16,16 @@ function App() {
     {note: 'C#', octave: 3, start: 3.5},
   ];
 
-  useEffect(() => {
-    setSequence(billieJean);
-    setAudioCtx(new window.AudioContext());
-  }, []);
+  const [sequence, setSequence] = useState<SequencedNote[]>(billieJean);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
+  const [audioCtx, setAudioCtx] = useState<AudioContext>(new window.AudioContext());
+  const [oscillator, setOscillator] = useState<Wave>('square');
+
+
+  // useEffect(() => {
+  //   setSequence(billieJean);
+  //   setAudioCtx(new window.AudioContext());
+  // }, []);
 
   const handleAddToSequence = (noteToAdd: SequencedNote) => {
     setSequence(currentSequence => [...currentSequence, noteToAdd]);
