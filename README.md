@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+# Piano Roll
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+My submission for Qvault's 2022/01/17 hackathon! My virtual instrument is a piano roll with a simple sequencer!
 
-## Available Scripts
+## Running Piano Roll
 
-In the project directory, you can run:
+To run this locally, clone this repository and navigate to the root directory in your terminal. Then run the following commands:
 
-### `npm start`
+```bash
+npm install
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Once the React server is running it should automatically open in your browser, but if not the default address this runs at is `http://localhost:3000/`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Using Piano Roll
 
-### `npm test`
+Click on the keys on the left to just hear a note.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Click on a cell in the sequencer to add or remove it from your sequence. You should hear the note as you toggle the cell on and off.
 
-### `npm run build`
+Once your sequence is set, click the Play button at the top to hear it! You can change the BPM and also set it to loop if desired.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+If there is any rogue audio playing, click the stop button and it should close the audio context and open a new one. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To clear the sequencer, click the Clear button. There is no undo at this time!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Notes
 
-### `npm run eject`
+There is currently nothing stopping you from clicking the play button multiple times and having the sequence playing on top of itself. Click use the stop button and it should stop ALL the sequences that are currently playing.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Once the play button is clicked, it will play what is in state when that button is clicked and will not recognize changes to the oscillator, BPM, or the sequence. To hear the changes you just need to click the play button again.
