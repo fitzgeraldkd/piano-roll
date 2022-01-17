@@ -15,7 +15,7 @@ export function playNote(audioCtx: AudioContext | undefined, noteObj: NoteObj, s
   oscillator.stop(audioCtx.currentTime + beatToTime(start + duration, bpm));
 }
 
-export function playSequence(audioCtx: AudioContext, sequence: SequencedNote[], bpm=120, loop=false) {
+export function playSequence(audioCtx: AudioContext | undefined, sequence: SequencedNote[], bpm=120, loop=false) {
   const startSequence = () => {
     for (const note of sequence) {
       playNote(audioCtx, note, note.start);
@@ -23,8 +23,8 @@ export function playSequence(audioCtx: AudioContext, sequence: SequencedNote[], 
   };
 
   if (loop) {
-    console.log('test');
-    return setInterval(startSequence, beatToTime(4, bpm));
+    startSequence();
+    return setInterval(startSequence, beatToTime(4, bpm) * 1000);
   }
   startSequence();
 

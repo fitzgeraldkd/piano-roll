@@ -39,22 +39,29 @@ function App() {
       }
       return false;
     }));
-  }
+  };
 
   const handlePlaySequence = (loop: boolean, bpm: number) => {
-    if (!audioCtx) {
-      console.error('AudioContext has not loaded');
-      return;
-    }
     const newIntervalId = playSequence(audioCtx, sequence, bpm, loop);
     if (newIntervalId) {
       setIntervalId(newIntervalId)
     }
   };
 
+  const handleStopAudio = () => {
+    if (audioCtx) {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      audioCtx.close().then(() => setAudioCtx(new window.AudioContext()));
+    } else {
+      setAudioCtx(new window.AudioContext());
+    }
+  };
+
   return (
     <div className="App">
-      <Controls handlePlaySequence={handlePlaySequence} />
+      <Controls handlePlaySequence={handlePlaySequence} handleStopAudio={handleStopAudio} />
       <PianoRoll
         sequence={sequence}
         handleAddToSequence={handleAddToSequence}

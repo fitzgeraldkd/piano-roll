@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 interface ControlsProps {
   handlePlaySequence: Function;
+  handleStopAudio: Function;
 }
 
-function Controls({ handlePlaySequence }: ControlsProps) {
+function Controls({ handlePlaySequence, handleStopAudio }: ControlsProps) {
   const [loop, setLoop] = useState(false);
   const [bpm, setBpm] = useState(120);
 
@@ -14,10 +15,10 @@ function Controls({ handlePlaySequence }: ControlsProps) {
 
   return (
     <div>
-      {/* <label htmlFor='loop'>Loop?</label> */}
-      {/* <input id='loop' type='checkbox' checked={loop} onChange={handleSetLoop} /> */}
+      <label htmlFor='loop'>Loop?</label>
+      <input id='loop' type='checkbox' checked={loop} onChange={handleSetLoop} />
       <button onClick={() => handlePlaySequence(loop, bpm)}>Play</button>
-      <button onClick={() => {}}>Stop</button>
+      <button onClick={() => handleStopAudio()}>Stop</button>
     </div>
   );
 }
