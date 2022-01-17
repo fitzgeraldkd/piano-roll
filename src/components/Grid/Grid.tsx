@@ -27,8 +27,6 @@ function Grid({ keys, notes, startingNote, startingOctave, sequence, styledProps
         // for (const subbeat of subbeats) {
         subbeats.forEach((subbeat, index) => {
           const inSequence = memoizedSequence[`${thisNote}${thisOctave}`] || [];
-          console.log(memoizedSequence);
-          console.log(inSequence);
           const classNames: string[] = [];
           classNames.push((beat % 2 === 0) ? 'beat-even' : 'beat-odd');
           classNames.push(`subbeat-${subbeat}`);

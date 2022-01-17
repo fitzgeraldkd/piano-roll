@@ -12,6 +12,10 @@ export default styled.div<GridStyleProps>`
     background-color: #ddd;
   }
 
+  .beat-odd {
+    background-color: #bbb;
+  }
+
   .cell-active {
     background-color: lime;
   }

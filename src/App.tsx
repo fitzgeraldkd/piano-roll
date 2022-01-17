@@ -5,9 +5,8 @@ import Controls from './views/Controls/Controls';
 import PianoRoll from './views/PianoRoll/PianoRoll';
 
 function App() {
-
-  const [bpm, setBpm] = useState(120);
   const [sequence, setSequence] = useState<SequencedNote[]>([]);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
 
   const billieJean: SequencedNote[] = [
     {note: 'F#', octave: 3, start: 0},
@@ -24,8 +23,11 @@ function App() {
     setSequence(billieJean);
   }, []);
 
-  const handlePlaySequence = () => {
-    playSequence(sequence);
+  const handlePlaySequence = (loop: boolean, bpm: number) => {
+    const newIntervalId = playSequence(sequence, bpm, loop);
+    if (newIntervalId) {
+      setIntervalId(newIntervalId)
+    }
   };
 
   return (

@@ -11,10 +11,19 @@ export function playNote(noteObj: NoteObj, start=0, duration=0.125, bpm=120) {
   oscillator.stop(beatToTime(start + duration, bpm));
 }
 
-export function playSequence(sequence: SequencedNote[], bpm=120) {
-  for (const note of sequence) {
-    playNote(note, note.start)
+export function playSequence(sequence: SequencedNote[], bpm=120, loop=false) {
+  const startSequence = () => {
+    for (const note of sequence) {
+      playNote(note, note.start);
+    }
+  };
+
+  if (loop) {
+    console.log('test');
+    return setInterval(startSequence, beatToTime(4, bpm));
   }
+  startSequence();
+
 }
 
 export function noteToFreq(noteObj: NoteObj) {
