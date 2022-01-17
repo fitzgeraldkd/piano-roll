@@ -16,6 +16,12 @@ export default styled.div`
   .title {
     font-weight: bold;
     font-size: 1.2em;
+
+    .help {
+      margin-left: 10px;
+      font-weight: initial;
+      font-size: 0.7em;
+    }
   }
 
   .inputs {

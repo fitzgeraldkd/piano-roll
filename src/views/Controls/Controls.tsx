@@ -26,6 +26,9 @@ function Controls({ handlePlaySequence, handleStopAudio, handleClearSequence, os
     <ControlsStyles>
       <span className='title'>
         Piano Roll by Kenny Fitzgerald
+        <span className='help'>
+          Click the cells to sequence a simple song!
+        </span>
       </span>
       <span className='inputs'>
         <label htmlFor='oscillator'>Oscillator:</label>
