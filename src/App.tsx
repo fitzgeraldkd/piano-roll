@@ -20,18 +20,18 @@ function App() {
     {note: 'C#', octave: 3, start: 3.5},
   ];
 
-  // useEffect(() => {
-  //   playSequence(billieJean);
-  // }, []);
+  useEffect(() => {
+    setSequence(billieJean);
+  }, []);
 
   const handlePlaySequence = () => {
-    playSequence(billieJean);
+    playSequence(sequence);
   };
 
   return (
     <div className="App">
       <Controls handlePlaySequence={handlePlaySequence} />
-      <PianoRoll />
+      <PianoRoll sequence={sequence} />
     </div>
   );
 }

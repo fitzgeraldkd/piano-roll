@@ -7,6 +7,10 @@ export interface NoteObj {
   octave: number;
 }
 
-export interface SequencedNote extends NoteObj {
-  start: number;
+export interface TimingObj {
+  start: number
+}
+
+export interface SequencedNote extends NoteObj, TimingObj {
+  // start: number;
 }

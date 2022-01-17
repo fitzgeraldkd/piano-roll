@@ -11,4 +11,8 @@ export default styled.div<GridStyleProps>`
   .beat-even {
     background-color: #ddd;
   }
+
+  .cell-active {
+    background-color: lime;
+  }
 `;
