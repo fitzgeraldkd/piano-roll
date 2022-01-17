@@ -4,9 +4,10 @@ import ControlsStyles from './Controls.styles';
 interface ControlsProps {
   handlePlaySequence: Function;
   handleStopAudio: Function;
+  handleClearSequence: Function;
 }
 
-function Controls({ handlePlaySequence, handleStopAudio }: ControlsProps) {
+function Controls({ handlePlaySequence, handleStopAudio, handleClearSequence }: ControlsProps) {
   const [loop, setLoop] = useState(false);
   const [bpm, setBpm] = useState(120);
 
@@ -32,6 +33,7 @@ function Controls({ handlePlaySequence, handleStopAudio }: ControlsProps) {
 
         <button onClick={() => handlePlaySequence(loop, bpm)}>Play</button>
         <button onClick={() => handleStopAudio()}>Stop</button>
+        <button onClick={() => handleClearSequence()}>Clear</button>
       </span>
       
     </ControlsStyles>

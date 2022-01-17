@@ -35,6 +35,7 @@ function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, au
         sequence={sequence} 
         handleAddToSequence={handleAddToSequence}
         handleRemoveFromSequence={handleRemoveFromSequence}
+        audioCtx={audioCtx}
       />
     </PianoRollStyles>
   );

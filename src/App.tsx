@@ -41,6 +41,10 @@ function App() {
     }));
   };
 
+  const handleClearSequence = () => {
+    setSequence([]);
+  };
+
   const handlePlaySequence = (loop: boolean, bpm: number) => {
     const newIntervalId = playSequence(audioCtx, sequence, bpm, loop);
     if (newIntervalId) {
@@ -61,7 +65,7 @@ function App() {
 
   return (
     <div className="App">
-      <Controls handlePlaySequence={handlePlaySequence} handleStopAudio={handleStopAudio} />
+      <Controls handlePlaySequence={handlePlaySequence} handleStopAudio={handleStopAudio} handleClearSequence={handleClearSequence} />
       <PianoRoll
         sequence={sequence}
         handleAddToSequence={handleAddToSequence}

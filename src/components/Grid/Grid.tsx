@@ -1,4 +1,5 @@
 import React from 'react';
+import { playNote } from '../../utils/audio';
 import { memoizeSequence } from '../../utils/helpers';
 import { Note, SequencedNote } from '../../utils/types';
 import GridStyles, { GridStyleProps } from './Grid.styles';
@@ -12,11 +13,13 @@ interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   sequence: SequencedNote[];
   handleAddToSequence: Function;
   handleRemoveFromSequence: Function;
+  audioCtx?: AudioContext;
 };
 
-function Grid({ keys, notes, startingNote, startingOctave, sequence, handleAddToSequence, handleRemoveFromSequence, styledProps, ...intrinsic }: GridProps) {
+function Grid({ keys, notes, startingNote, startingOctave, sequence, handleAddToSequence, handleRemoveFromSequence, audioCtx, styledProps, ...intrinsic }: GridProps) {
 
   const handleCellClick = (isSequenced: boolean, note: SequencedNote) => {
+    playNote(audioCtx, note);
     if (isSequenced) {
       handleRemoveFromSequence(note);
     } else {
