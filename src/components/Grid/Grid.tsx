@@ -39,12 +39,17 @@ function Grid({ keys, notes, startingNote, startingOctave, sequence, handleAddTo
             octave: thisOctave,
             start: beat + (index / 4)
           };
-          const classNames: string[] = [];
+          const classNames: string[] = ['cell'];
           const isSequenced = inSequence.some(sequenced => sequenced.start === (beat + (index / 4)));
           classNames.push((beat % 2 === 0) ? 'beat-even' : 'beat-odd');
           classNames.push(`subbeat-${subbeat}`);
           classNames.push(isSequenced ? 'cell-active' : '');
-          cells.push(<span key={`${thisKey}-${beat}-${subbeat}`} className={classNames.join(' ')} onClick={() => handleCellClick(isSequenced, noteObj)}>{beat}</span>);
+          classNames.push((thisNote.length === 1 ? 'cell-natural' : 'cell-accidental'));
+          cells.push(
+            <span key={`${thisKey}-${beat}-${subbeat}`} className={classNames.join(' ')} onClick={() => handleCellClick(isSequenced, noteObj)}>
+              {/* {beat} */}
+            </span>
+          );
         });
       }
     }

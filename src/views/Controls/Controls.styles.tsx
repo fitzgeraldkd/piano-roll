@@ -7,6 +7,7 @@ export default styled.div`
   padding: 10px;
   width: 100vw;
   background-color: white;
+  z-index: 1;
 
   input, button {
     margin-right: 35px;
