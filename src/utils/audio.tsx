@@ -18,10 +18,9 @@ export function playNote(audioCtx: AudioContext | undefined, noteObj: NoteObj, s
 export function playSequence(audioCtx: AudioContext | undefined, sequence: SequencedNote[], bpm=120, loop=false) {
   const startSequence = () => {
     for (const note of sequence) {
-      playNote(audioCtx, note, note.start);
+      playNote(audioCtx, note, note.start, 0.125, bpm);
     }
   };
-
   if (loop) {
     startSequence();
     return setInterval(startSequence, beatToTime(4, bpm) * 1000);

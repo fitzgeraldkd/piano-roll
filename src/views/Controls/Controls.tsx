@@ -13,10 +13,18 @@ function Controls({ handlePlaySequence, handleStopAudio }: ControlsProps) {
     setLoop(e.target.checked);
   };
 
+  const handleChangeBpm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBpm(parseInt(e.target.value, 10));
+  };
+
   return (
     <div>
       <label htmlFor='loop'>Loop?</label>
       <input id='loop' type='checkbox' checked={loop} onChange={handleSetLoop} />
+
+      <label htmlFor='bpm'>BPM:</label>
+      <input id='bpm' type='number' value={bpm} onChange={handleChangeBpm} min={30} max={500} />
+
       <button onClick={() => handlePlaySequence(loop, bpm)}>Play</button>
       <button onClick={() => handleStopAudio()}>Stop</button>
     </div>
