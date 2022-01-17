@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import { Wave } from '../../utils/types';
 import ControlsStyles from './Controls.styles';
 
 interface ControlsProps {
   handlePlaySequence: Function;
   handleStopAudio: Function;
   handleClearSequence: Function;
+  oscillator: Wave;
+  handleSetOscillator: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
-function Controls({ handlePlaySequence, handleStopAudio, handleClearSequence }: ControlsProps) {
+function Controls({ handlePlaySequence, handleStopAudio, handleClearSequence, oscillator, handleSetOscillator }: ControlsProps) {
   const [loop, setLoop] = useState(false);
   const [bpm, setBpm] = useState(120);
 
@@ -25,6 +28,14 @@ function Controls({ handlePlaySequence, handleStopAudio, handleClearSequence }: 
         Piano Roll by Kenny Fitzgerald
       </span>
       <span className='inputs'>
+        <label htmlFor='oscillator'>Oscillator:</label>
+        <select onChange={handleSetOscillator} value={oscillator}>
+          <option value='square'>Square</option>
+          <option value='sine'>Sine</option>
+          <option value='sawtooth'>Sawtooth</option>
+          <option value='triangle'>Triangle</option>
+        </select>
+
         <label htmlFor='loop'>Loop?</label>
         <input id='loop' type='checkbox' checked={loop} onChange={handleSetLoop} />
 

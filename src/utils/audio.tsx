@@ -1,24 +1,22 @@
-import { Note, NoteObj, SequencedNote } from "./types";
+import { Note, NoteObj, SequencedNote, Wave } from "./types";
 
-export function playNote(audioCtx: AudioContext | undefined, noteObj: NoteObj, start=0, duration=0.125, bpm=120) {
-  // const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  // const audioCtx = new window.AudioContext();
+export function playNote(audioCtx: AudioContext | undefined, noteObj: NoteObj, start=0, duration=0.125, bpm=120, wave: Wave = 'square') {
   if (!audioCtx) {
     console.error('Audio context has not loaded');
     return;
   }
   const oscillator = audioCtx.createOscillator();
-  oscillator.type = 'square';
+  oscillator.type = wave;
   oscillator.frequency.setValueAtTime(noteToFreq(noteObj), 0);
   oscillator.connect(audioCtx.destination);
   oscillator.start(audioCtx.currentTime + beatToTime(start, bpm));
   oscillator.stop(audioCtx.currentTime + beatToTime(start + duration, bpm));
 }
 
-export function playSequence(audioCtx: AudioContext | undefined, sequence: SequencedNote[], bpm=120, loop=false) {
+export function playSequence(audioCtx: AudioContext | undefined, sequence: SequencedNote[], bpm=120, loop=false, wave?: Wave) {
   const startSequence = () => {
     for (const note of sequence) {
-      playNote(audioCtx, note, note.start, 0.125, bpm);
+      playNote(audioCtx, note, note.start, 0.125, bpm, wave);
     }
   };
   if (loop) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '../../components/Grid/Grid';
 import Keyboard from '../../components/Keyboard/Keyboard';
-import { Note, SequencedNote } from '../../utils/types';
+import { Note, SequencedNote, Wave } from '../../utils/types';
 import PianoRollStyles from './PianoRoll.styles';
 
 interface PianoRollProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -9,9 +9,10 @@ interface PianoRollProps extends React.HTMLAttributes<HTMLDivElement> {
   handleAddToSequence: Function;
   handleRemoveFromSequence: Function;
   audioCtx?: AudioContext;
+  oscillator: Wave;
 }
 
-function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, audioCtx, ...intrinsic }: PianoRollProps) {
+function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, audioCtx, oscillator, ...intrinsic }: PianoRollProps) {
   const notes: Note[] = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
   const keys = 61;
   const startingNote = 3;
@@ -25,6 +26,7 @@ function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, au
         startingNote={startingNote} 
         startingOctave={startingOctave} 
         audioCtx={audioCtx}
+        oscillator={oscillator}
       />
       <Grid 
         styledProps={{beats: 4}} 
@@ -36,6 +38,7 @@ function PianoRoll({ sequence, handleAddToSequence, handleRemoveFromSequence, au
         handleAddToSequence={handleAddToSequence}
         handleRemoveFromSequence={handleRemoveFromSequence}
         audioCtx={audioCtx}
+        oscillator={oscillator}
       />
     </PianoRollStyles>
   );

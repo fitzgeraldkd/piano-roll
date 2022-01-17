@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { playSequence } from './utils/audio';
-import { SequencedNote } from './utils/types';
+import { SequencedNote, Wave } from './utils/types';
 import Controls from './views/Controls/Controls';
 import PianoRoll from './views/PianoRoll/PianoRoll';
 
@@ -8,6 +8,7 @@ function App() {
   const [sequence, setSequence] = useState<SequencedNote[]>([]);
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
   const [audioCtx, setAudioCtx] = useState<AudioContext>();
+  const [oscillator, setOscillator] = useState<Wave>('square');
 
   const billieJean: SequencedNote[] = [
     {note: 'F#', octave: 3, start: 0},
@@ -46,7 +47,7 @@ function App() {
   };
 
   const handlePlaySequence = (loop: boolean, bpm: number) => {
-    const newIntervalId = playSequence(audioCtx, sequence, bpm, loop);
+    const newIntervalId = playSequence(audioCtx, sequence, bpm, loop, oscillator);
     if (newIntervalId) {
       setIntervalId(newIntervalId)
     }
@@ -63,14 +64,25 @@ function App() {
     }
   };
 
+  const handleSetOscillator = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setOscillator(e.target.value as Wave);
+  };
+
   return (
     <div className="App">
-      <Controls handlePlaySequence={handlePlaySequence} handleStopAudio={handleStopAudio} handleClearSequence={handleClearSequence} />
+      <Controls
+        handlePlaySequence={handlePlaySequence}
+        handleStopAudio={handleStopAudio} 
+        handleClearSequence={handleClearSequence}
+        oscillator={oscillator}
+        handleSetOscillator={handleSetOscillator}
+      />
       <PianoRoll
         sequence={sequence}
         handleAddToSequence={handleAddToSequence}
         handleRemoveFromSequence={handleRemoveFromSequence}
         audioCtx={audioCtx}
+        oscillator={oscillator}
       />
     </div>
   );

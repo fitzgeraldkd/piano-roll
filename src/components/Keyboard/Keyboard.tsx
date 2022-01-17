@@ -1,6 +1,6 @@
 import React from 'react';
 import { playNote } from '../../utils/audio';
-import { Note, NoteObj } from '../../utils/types';
+import { Note, NoteObj, Wave } from '../../utils/types';
 import KeyboardStyles from './Keyboard.styles';
 
 interface KeyboardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -9,9 +9,10 @@ interface KeyboardProps extends React.HTMLAttributes<HTMLDivElement> {
   startingNote: number;
   startingOctave: number;
   audioCtx?: AudioContext;
+  oscillator: Wave;
 }
 
-function Keyboard({keys, notes, startingNote, startingOctave, audioCtx}: KeyboardProps) {
+function Keyboard({keys, notes, startingNote, startingOctave, audioCtx, oscillator}: KeyboardProps) {
 
   const renderKeys = (keys: number) => {
     const keyElements = [];
@@ -22,7 +23,7 @@ function Keyboard({keys, notes, startingNote, startingOctave, audioCtx}: Keyboar
       classNames.push((thisNote.length === 1 ? 'key-natural' : 'key-accidental'));
       const noteObj: NoteObj = {note: thisNote, octave: thisOctave};
       keyElements.push(
-        <span key={thisKey} className={classNames.join(' ')} onClick={() => playNote(audioCtx, noteObj)}>
+        <span key={thisKey} className={classNames.join(' ')} onClick={() => playNote(audioCtx, noteObj, undefined, undefined, undefined, oscillator)}>
           {thisNote}{thisOctave}
         </span>
       );

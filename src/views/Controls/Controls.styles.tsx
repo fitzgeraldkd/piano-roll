@@ -9,7 +9,7 @@ export default styled.div`
   background-color: white;
   z-index: 1;
 
-  input, button {
+  input, button, select {
     margin-right: 35px;
   }
 
