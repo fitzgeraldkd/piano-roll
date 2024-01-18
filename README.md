@@ -1,6 +1,6 @@
 # Piano Roll
 
-My submission for Qvault's 2022/01/17 hackathon! My virtual instrument is a piano roll with a simple sequencer!
+My submission for Boot.dev's 2022/01/17 hackathon! My virtual instrument is a piano roll with a simple sequencer!
 
 ## Running Piano Roll
 
